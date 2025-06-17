@@ -12,7 +12,7 @@ import os
 def load_model():
     # Replace with your actual model path
     model = joblib.load('best_xgb_model.pkl')
-    scaler = joblib.load('vocaloid_Scaler.pkl')
+    scaler = joblib.load('vocaloid_scaler.pkl')
     return model, scaler
 
 def extract_features(audio_path: str, sr=22050, n_mfcc=13):
