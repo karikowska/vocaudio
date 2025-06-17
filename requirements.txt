@@ -74,6 +74,7 @@ six==1.17.0
 smmap==5.0.2
 soundfile==0.13.1
 soxr==0.5.0.post1
+setuptools
 stack_data @ file:///home/conda/feedstock_root/build_artifacts/stack_data_1733569443808/work
 streamlit==1.45.1
 tenacity==9.1.2
