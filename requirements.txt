@@ -109,15 +109,7 @@ soxr==0.5.0.post1
 streamlit==1.45.1
 sympy==1.14.0
 tenacity==9.1.2
-tensorboard==2.14.1
-tensorboard-data-server==0.7.2
-tensorflow==2.14.0
-tensorflow-cpu==2.15.0
-tensorflow-estimator==2.14.0
-tensorflow-hub==0.16.1
-tensorflow-io-gcs-filesystem==0.37.1
 termcolor==3.1.0
-tf_keras==2.19.0
 threadpoolctl==3.6.0
 tifffile==2025.5.10
 tokenizers==0.21.1
