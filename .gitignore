@@ -1,0 +1,27 @@
+# Music files
+*.mp3
+*.wav
+*.flac
+*.m4a
+*.aac
+*.ogg
+*.wma
+*.npy
+
+# Dataset folders
+/audio_files/
+/music_clips/
+/raw_audio/
+/dataset/audio/
+
+# But keep the extracted features
+!*.csv
+!features.csv
+!dataset_features.csv
+
+# Other common exclusions
+*.pkl
+*.joblib
+/models/
+__pycache__/
+.DS_Store
