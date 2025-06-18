@@ -20,7 +20,6 @@
 !dataset_features.csv
 
 # Other common exclusions
-*.pkl
 *.joblib
 /models/
 __pycache__/

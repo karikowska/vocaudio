@@ -64,7 +64,6 @@ def extract_features(audio_path: str, sr=22050, n_mfcc=13):
     return pd.DataFrame([features])
 
 def main():
-    # Custom CSS for gradient background
     st.markdown("""
     <style>
     .stApp {
@@ -72,7 +71,6 @@ def main():
         background-attachment: fixed;
     }
     
-    /* Make main content area transparent */
     .main .block-container {
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
@@ -82,18 +80,15 @@ def main():
         border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
-    /* Style the title */
     h1 {
         color: white;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
     
-    /* Style other text */
     .stMarkdown, .stText {
         color: white;
     }
     
-    /* Style buttons */
     .stButton > button {
         background: linear-gradient(45deg, #ff6b6b, #ee5a24);
         color: white;
@@ -109,7 +104,6 @@ def main():
         box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
     
-    /* Style file uploader */
     .stFileUploader {
         background: rgba(255, 255, 255, 0.1);
         border-radius: 10px;
@@ -117,7 +111,6 @@ def main():
         border: 2px dashed rgba(255, 255, 255, 0.3);
     }
     
-    /* Style success/error messages */
     .stSuccess {
         background: rgba(76, 175, 80, 0.2);
         border-left: 4px solid #4CAF50;
@@ -131,7 +124,7 @@ def main():
     """, unsafe_allow_html=True)
 
     st.title("🎵 Vocaloid vs Human Voice Classifier")
-    st.write("Upload an MP3 file to classify whether it contains Vocaloid or human vocals!")
+    st.write("Upload an MP3 file and get it classified!")
     
     # File upload
     uploaded_file = st.file_uploader("Choose an MP3 file", type=['mp3', 'wav'])
@@ -144,37 +137,31 @@ def main():
         # Play the audio
         st.audio(uploaded_file, format='audio/mp3')
         
+        # if the button is clicked then process
         if st.button("Classify Audio"):
             with st.spinner("Processing audio and extracting features..."):
                 try:
-                    # Save uploaded file temporarily
                     with tempfile.NamedTemporaryFile(delete=False, suffix='.mp3') as tmp_file:
                         tmp_file.write(uploaded_file.getvalue())
                         tmp_file_path = tmp_file.name
                     
-                    # Extract features
                     features_df = extract_features(tmp_file_path)
                     
-                    # Load model and scaler
                     model, scaler = load_model()
                     
-                    # Scale features (same as training)
                     features_scaled = scaler.transform(features_df)
                     
-                    # Make prediction
                     prediction = model.predict(features_scaled)[0]
                     prediction_proba = model.predict_proba(features_scaled)[0]
                     
-                    # Clean up temp file
                     os.unlink(tmp_file_path)
                     
-                    # Display results
                     st.success("Classification complete!")
                     
                     col1, col2 = st.columns(2)
                     
                     with col1:
-                        if prediction == 1:  # Assuming 1 = vocaloid
+                        if prediction == 1:
                             st.markdown("### 🤖 **Vocaloid**")
                         else:
                             st.markdown("### 👤 **Human**")
@@ -184,16 +171,8 @@ def main():
                         st.write(f"Human: {prediction_proba[0]:.1%}")
                         st.write(f"Vocaloid: {prediction_proba[1]:.1%}")
                     
-                    # # Progress bar for visual appeal
-                    # st.write("**Prediction Confidence:**")
-                    # if prediction == 1:
-                    #     st.progress(prediction_proba[1])
-                    # else:
-                    #     st.progress(prediction_proba[0])
-                    
-                    # Show some feature info for debugging
-                    with st.expander("🔍 Feature Details (for debugging)"):
-                        st.write("**Extracted Features:**")
+                    with st.expander("Debug info"):
+                        st.write("**Extracted features:**")
                         st.dataframe(features_df.head())
                         st.write(f"**Total features extracted:** {len(features_df.columns)}")
                         
