@@ -1,4 +1,4 @@
-My personal PC broke down so this README is currently on the TODO list for when I fix it!
+My personal PC broke down and with it, the original repo & dataset I made myself, so this README is currently on the TODO list for when I fix it!
 
 You can test out the app yourself here: https://vocaloid-classifier.streamlit.app/
 
